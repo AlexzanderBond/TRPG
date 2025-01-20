@@ -1,0 +1,32 @@
+//
+// Created by creep on 1/18/2025.
+//
+
+#ifndef LIVING_ENTITY_H
+#define LIVING_ENTITY_H
+#include <memory>
+
+#include "entity.h"
+
+namespace rpg {
+
+class living_entity {
+protected:
+    std::shared_ptr<entity> entity;
+    int32_t health;
+
+public:
+    explicit living_entity(const std::shared_ptr<rpg::entity> &entity);
+
+    virtual ~living_entity() = default;
+
+    [[nodiscard]] int32_t get_health() const;
+    [[nodiscard]] int32_t get_max_health() const;
+    void set_health(int32_t health);
+
+    virtual void take_damage(int32_t damage);
+};
+
+} // rpg
+
+#endif //LIVING_ENTITY_H
