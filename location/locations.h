@@ -12,10 +12,12 @@
 namespace rpg {
     inline std::shared_ptr<location> FOREST_LOCATION;
 
-    inline void register_locations() {
-        std::vector<std::shared_ptr<rpg::creature>> possible_creatures = {WOLF, TROLL};
+    inline std::vector<std::shared_ptr<rpg::creature>> pc(const std::vector<std::shared_ptr<rpg::creature>>& creatures) {
+        return creatures;
+    }
 
-        FOREST_LOCATION = std::make_shared<rpg::location>("Forest", "A dense and mysterious forest", possible_creatures);
+    inline void register_locations() {
+        FOREST_LOCATION = std::make_shared<rpg::location>("Forest", "A dense and mysterious forest", pc({WOLF, TROLL}));
     }
 }
 
