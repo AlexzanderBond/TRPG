@@ -5,9 +5,11 @@
 #include "entity.h"
 
 namespace rpg {
-    entity::entity(const std::string &name, const int32_t max_health) {
+    entity::entity(const std::string &name, const std::string& description, const int32_t max_health, const int32_t defense) {
         this->name = name;
+        this->description = description;
         this->max_health = max_health;
+        this->defense = defense;
     }
 
     entity::~entity() = default;
@@ -16,7 +18,15 @@ namespace rpg {
         return name;
     }
 
+    std::string entity::get_description() {
+        return description;
+    }
+
     int32_t entity::get_max_health() const {
         return max_health;
+    }
+
+    int32_t entity::get_defense() const {
+        return defense;
     }
 } // rpg

@@ -16,8 +16,28 @@ namespace rpg {
         return health;
     }
 
+    bool living_entity::is_alive() const {
+        return health > 0;
+    }
+
+    bool living_entity::is_dead() const {
+        return health <= 0;
+    }
+
+    std::string living_entity::get_name() const {
+        return this->entity->get_name();
+    }
+
+    std::string living_entity::get_description() const {
+        return this->entity->get_description();
+    }
+
     int32_t living_entity::get_max_health() const {
         return this->entity->get_max_health();
+    }
+
+    int32_t living_entity::get_defense() const {
+        return this->entity->get_defense();
     }
 
     void living_entity::set_health(const int32_t health) {
@@ -25,6 +45,6 @@ namespace rpg {
     }
 
     void living_entity::take_damage(const int32_t damage) {
-        health -= damage;
+        health -= (damage - this->entity->get_defense());
     }
 } // rpg

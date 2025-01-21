@@ -4,5 +4,5 @@
 
 #include "creature.h"
 
-rpg::creature::creature(const std::string &name, const int32_t max_health) : entity(name, max_health) {
+rpg::creature::creature(const std::string &name, const std::string& description, const int32_t max_health, const int32_t defense) : entity(name, description, max_health, defense) {
 }

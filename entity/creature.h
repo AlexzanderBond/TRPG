@@ -8,12 +8,14 @@
 
 
 namespace rpg {
-    class creature: public entity {
 
-    public:
-        creature(const std::string &name, int32_t max_health);
-        [[nodiscard]] virtual bool is_hostile() const = 0;
-    };
+class creature: public entity {
+public:
+    creature(const std::string &name, const std::string& description, int32_t max_health, int32_t defense);
+    ~creature() override = default;
+    [[nodiscard]] virtual bool is_hostile() const = 0;
+};
+
 }
 
 

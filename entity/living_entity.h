@@ -21,7 +21,12 @@ public:
     virtual ~living_entity() = default;
 
     [[nodiscard]] int32_t get_health() const;
+    [[nodiscard]] bool is_alive() const;
+    [[nodiscard]] bool is_dead() const;
+    [[nodiscard]] std::string get_name() const;
+    [[nodiscard]] std::string get_description() const;
     [[nodiscard]] int32_t get_max_health() const;
+    [[nodiscard]] int32_t get_defense() const;
     void set_health(int32_t health);
 
     virtual void take_damage(int32_t damage);
