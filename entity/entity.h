@@ -24,6 +24,8 @@ public:
     std::string get_description();
     [[nodiscard]] int32_t get_max_health() const;
     [[nodiscard]] int32_t get_defense() const;
+
+    friend std::ostream& operator<<(std::ostream& os, const entity& entity);
 };
 
 } // rpg

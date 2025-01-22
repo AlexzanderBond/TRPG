@@ -12,6 +12,13 @@
 namespace rpg {
     inline std::shared_ptr<location> FOREST_LOCATION;
 
+    /**
+     * PC stands for possible_creatures
+     * Returns a vector containing shared pointers to creatures.
+     *
+     * @param creatures A vector of shared pointers to rpg::creature objects.
+     * @return A vector of shared pointers to rpg::creature objects.
+     */
     inline std::vector<std::shared_ptr<rpg::creature>> pc(const std::vector<std::shared_ptr<rpg::creature>>& creatures) {
         return creatures;
     }

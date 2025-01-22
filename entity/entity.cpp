@@ -3,6 +3,7 @@
 //
 
 #include "entity.h"
+#include <iostream>
 
 namespace rpg {
     entity::entity(const std::string &name, const std::string& description, const int32_t max_health, const int32_t defense) {
@@ -28,5 +29,11 @@ namespace rpg {
 
     int32_t entity::get_defense() const {
         return defense;
+    }
+
+    std::ostream & operator<<(std::ostream &os, const entity &entity) {
+        os << "Entity{Name=" << entity.name << ", Description=" << entity.description << ", Max Health=" << entity.max_health << ", Defense=" << entity.defense << "}";
+
+        return os;
     }
 } // rpg

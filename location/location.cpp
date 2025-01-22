@@ -4,8 +4,6 @@
 
 #include "location.h"
 
-#include <utility>
-
 namespace rpg {
     location::location(const std::string &name, const std::string &description, std::vector<std::shared_ptr<rpg::creature>> possible_creatures) {
         this->name = name;
@@ -28,6 +26,7 @@ namespace rpg {
         return this->possible_creatures;
     }
 
-    std::shared_ptr<rpg::creature> location::get_random_creature() {
+    std::shared_ptr<rpg::creature> location::get_random_creature(std::random_device& rd) {
+        return possible_creatures[rd() % possible_creatures.size()];
     }
 } // rpg

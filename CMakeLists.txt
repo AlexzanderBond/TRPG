@@ -15,4 +15,9 @@ add_executable(TRPG main.cpp
         location/location.h
         entity/hostile_creature.cpp
         entity/hostile_creature.h
-        location/locations.h)
+        location/locations.h
+        action/action.cpp
+        action/action.h
+        action/actions.h
+        game/game_state.cpp
+        game/game_state.h)

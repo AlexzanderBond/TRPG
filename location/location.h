@@ -7,6 +7,7 @@
 #include <memory>
 #include <string>
 #include <vector>
+#include <random>
 
 #include "../entity/creature.h"
 
@@ -28,7 +29,7 @@ public:
     [[nodiscard]] std::string get_description();
     [[nodiscard]] std::vector<std::shared_ptr<rpg::creature>> get_possible_creatures();
 
-    [[nodiscard]] std::shared_ptr<rpg::creature> get_random_creature();
+    [[nodiscard]] std::shared_ptr<rpg::creature> get_random_creature(std::random_device& rd);
 };
 
 } // rpg
