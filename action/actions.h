@@ -14,12 +14,13 @@
 
 #include "action.h"
 #include "../location/locations.h"
+#include "../utility/format.h"
 
 namespace rpg {
     inline const std::vector<std::string> EXPLORE_TEMPLATES = {
-        "You stumble into a %s, and look around to your surroundings. %s",
-        "You walk along and find a %s. After a moment you take in your surroundings. %s",
-        "After wandering for a while you see a %s. You decide to go in and see what you can find. %s"
+        "You stumble into a {}, and look around to your surroundings. {}",
+        "You walk along and find a {}. After a moment you take in your surroundings. {}",
+        "After wandering for a while you see a {}. You decide to go in and see what you can find. {}"
     };
     inline std::shared_ptr<rpg::action> EXPLORE;
 
@@ -27,18 +28,14 @@ namespace rpg {
         EXPLORE = std::make_shared<rpg::action>(
             "Explore",
             "Explore the world.",
-            [](std::shared_ptr<game_state> gs, const std::vector<std::string>&) {
+            [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>&) {
                 gs->update_location(FOREST_LOCATION);
 
                 const auto& templates = EXPLORE_TEMPLATES;
 
                 uint32_t random_index = gs->get_random_number(0, static_cast<uint32_t>(templates.size() - 1));
 
-                char buffer[1024];
-                std::sprintf(buffer, templates[random_index].c_str(),
-                    FOREST_LOCATION->get_name().c_str(),
-                    FOREST_LOCATION->get_description().c_str());
-                std::cout << buffer << std::endl;
+                std::cout << rpg::format(templates[random_index], gs->get_current_location()->get_name(), gs->get_current_location()->get_description()) << std::endl;
             });
     }
 }

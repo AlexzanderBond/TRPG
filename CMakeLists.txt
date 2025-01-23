@@ -20,4 +20,6 @@ add_executable(TRPG main.cpp
         action/action.h
         action/actions.h
         game/game_state.cpp
-        game/game_state.h)
+        game/game_state.h
+        utility/format.h
+)
