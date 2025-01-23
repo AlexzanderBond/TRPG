@@ -3,3 +3,29 @@
 //
 
 #include "game_state.h"
+
+rpg::game_state::game_state() {
+    current_location = nullptr;
+    previous_locations = std::stack<std::shared_ptr<rpg::location>>();
+    this->rd = std::make_unique<std::random_device>();
+}
+
+void rpg::game_state::update_location(const std::shared_ptr<rpg::location> &location) {
+    current_location = location;
+}
+
+std::shared_ptr<rpg::location> rpg::game_state::get_current_location() const {
+    return current_location;
+}
+
+std::shared_ptr<rpg::location> rpg::game_state::get_previous_location() const {
+    if (previous_locations.empty()) {
+        return nullptr;
+    }
+
+    return previous_locations.top();
+}
+
+uint32_t rpg::game_state::get_random_number(const uint32_t min, const uint32_t max) const {
+    return (*rd)() % (max - min + 1) + min;
+}

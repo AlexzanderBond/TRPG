@@ -9,11 +9,9 @@ int main() {
     rpg::register_locations();
     rpg::register_actions();
 
-    std::random_device rd;
+    std::shared_ptr<rpg::game_state> gs = std::make_shared<rpg::game_state>();
 
-    std::cout << *rpg::FOREST_LOCATION->get_random_creature(rd) << std::endl;
-
-    (*rpg::EXPLORE)({});
+    (*rpg::EXPLORE)(gs, {});
 
     return 0;
 }

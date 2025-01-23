@@ -24,7 +24,7 @@ namespace rpg {
     }
 
     inline void register_locations() {
-        FOREST_LOCATION = std::make_shared<rpg::location>("Forest", "A dense and mysterious forest", pc({WOLF, TROLL}));
+        FOREST_LOCATION = std::make_shared<rpg::location>("forest", "You see a dense and mysterious forest, enthralled with life. You hear some rustling around you. Do you want to investigate or will you leave it a mystery.", pc({WOLF, TROLL}));
     }
 }
 

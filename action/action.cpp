@@ -4,9 +4,11 @@
 
 #include "action.h"
 
+#include <utility>
+
 namespace rpg {
     action::action(const std::string &name, const std::string &description,
-        const std::function<void(std::vector<std::string>)> &action_function) {
+        const std::function<void(std::shared_ptr<game_state>, std::vector<std::string>)> &action_function) {
         this->name = name;
         this->description = description;
         this->action_function = action_function;
@@ -22,11 +24,11 @@ namespace rpg {
         return description;
     }
 
-    void action::execute(const std::vector<std::string> &args) const {
-        action_function(args);
+    void action::execute(std::shared_ptr<game_state> gs, const std::vector<std::string> &args) const {
+        action_function(std::move(gs), args);
     }
 
-    void action::operator()(const std::vector<std::string> &args) const {
-        execute(args);
+    void action::operator()(std::shared_ptr<game_state> gs, const std::vector<std::string> &args) const {
+        execute(std::move(gs), args);
     }
 } // rpg
