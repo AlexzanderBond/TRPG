@@ -17,9 +17,11 @@
 
 namespace rpg {
     inline const std::vector<std::string> EXPLORE_TEMPLATES = {
-        "You stumble into a %s, and look around to your surroundings. %s"
+        "You stumble into a %s, and look around to your surroundings. %s",
+        "You walk along and find a %s. After a moment you take in your surroundings. %s",
+        "After wandering for a while you see a %s. You decide to go in and see what you can find. %s"
     };
-    std::shared_ptr<rpg::action> EXPLORE;
+    inline std::shared_ptr<rpg::action> EXPLORE;
 
     inline void register_actions() {
         EXPLORE = std::make_shared<rpg::action>(

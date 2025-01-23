@@ -15,6 +15,7 @@ namespace rpg {
     /**
      * PC stands for possible_creatures
      * Returns a vector containing shared pointers to creatures.
+     * This is a helper method to remove ambiguity for an array initializer.
      *
      * @param creatures A vector of shared pointers to rpg::creature objects.
      * @return A vector of shared pointers to rpg::creature objects.
