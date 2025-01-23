@@ -21,10 +21,6 @@ namespace helper {
         return oss.str();
     }
 
-    // Recursive function to replace placeholders with arguments
-    template <typename... Args>
-    void process_placeholders(std::ostringstream& oss, const std::string& format, size_t& pos, Args&&... args) = delete;
-
     // Base case: no arguments left
     inline void process_placeholders(std::ostringstream& oss, const std::string& format, const size_t& pos) {
         // Append the rest of the format string

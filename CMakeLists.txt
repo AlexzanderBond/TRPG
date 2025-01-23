@@ -22,4 +22,5 @@ add_executable(TRPG main.cpp
         game/game_state.cpp
         game/game_state.h
         utility/format.h
+        utility/string.h
 )
