@@ -32,6 +32,10 @@ int main() {
                 }
             }
         }
+
+        possible_actions.clear();
+        possible_actions.insert(possible_actions.end(), default_actions.begin(), default_actions.end());
+        gs->get_possible_actions(possible_actions);
     }
 
     return 0;

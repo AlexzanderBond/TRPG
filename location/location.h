@@ -12,6 +12,10 @@
 #include "../entity/creature.h"
 
 namespace rpg {
+    class action;
+}
+
+namespace rpg {
 
 class location {
 protected:
@@ -30,6 +34,8 @@ public:
     [[nodiscard]] std::vector<std::shared_ptr<rpg::creature>> get_possible_creatures();
 
     [[nodiscard]] std::shared_ptr<rpg::creature> get_random_creature(std::random_device& rd);
+
+    virtual void get_possible_actions(std::vector<std::shared_ptr<rpg::action>> &vector);
 };
 
 } // rpg

@@ -3,6 +3,9 @@
 //
 
 #include "game_state.h"
+#include "../action/action.h"
+#include "../location/location.h"
+#include <random>
 
 rpg::game_state::game_state() {
     current_location = nullptr;
@@ -12,6 +15,10 @@ rpg::game_state::game_state() {
 
 void rpg::game_state::update_location(const std::shared_ptr<rpg::location> &location) {
     current_location = location;
+}
+
+void rpg::game_state::get_possible_actions(std::vector<std::shared_ptr<rpg::action>> &actions) const {
+    this->current_location->get_possible_actions(actions);
 }
 
 std::shared_ptr<rpg::location> rpg::game_state::get_current_location() const {

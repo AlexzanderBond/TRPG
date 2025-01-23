@@ -11,6 +11,10 @@
 
 
 namespace rpg {
+    class action;
+}
+
+namespace rpg {
     class game_state {
     protected:
         std::shared_ptr<rpg::location> current_location;
@@ -21,6 +25,8 @@ namespace rpg {
         game_state();
         ~game_state() = default;
         void update_location(const std::shared_ptr<rpg::location> &location);
+
+        void get_possible_actions(std::vector<std::shared_ptr<rpg::action>> &actions) const;
 
         [[nodiscard]] std::shared_ptr<rpg::location> get_current_location() const;
         [[nodiscard]] std::shared_ptr<rpg::location> get_previous_location() const;
