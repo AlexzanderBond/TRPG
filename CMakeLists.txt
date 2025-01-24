@@ -23,4 +23,8 @@ add_executable(TRPG main.cpp
         game/game_state.h
         utility/format.h
         utility/string.h
+        item/item.cpp
+        item/item.h
+        item/inventory.cpp
+        item/inventory.h
 )
