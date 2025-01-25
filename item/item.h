@@ -18,9 +18,9 @@ private:
     std::string name;
 
 public:
-    item(int32_t id, std::string name);
+    item(int32_t id, const std::string &name);
     virtual ~item();
-    bool operator==(const item& other) const = default;
+    bool operator==(const item& other) const;
 };
 
 } // rpg

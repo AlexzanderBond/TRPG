@@ -13,23 +13,36 @@ namespace rpg {
         this->items.resize(size);
     }
 
-    void inventory::add_item(const item item) {
-        this->items.push_back(item);
+    void inventory::add_item(const std::shared_ptr<item> &item) {
+        this->items.push_back({item, 1});
     }
 
-    void inventory::remove_item(const item item) {
+    void inventory::remove_item(const std::shared_ptr<item> &item, int32_t amount) {
         for (int32_t i = 0; i < this->items.size(); i++) {
-            if (this->items[i] == item) {
-                this->items.erase(this->items.begin() + i);
+            auto& is = this->items[i];
+
+            if (is.item == item) {
+                is.amount -= amount;
+
+                if (is.amount <= 0) {
+                    this->items.erase(this->items.begin() + i);
+                }
+
+                break;
             }
         }
     }
 
-    void inventory::remove_item(const int32_t index) {
-        this->items.erase(this->items.begin() + index);
+    void inventory::remove_item(const int32_t index, const int32_t amount) {
+        this->items[index].amount -= amount;
+
+        if (this->items[index].amount <= 0) {
+            this->items.erase(this->items.begin() + index);
+        }
     }
 
-    item inventory::get_item(const int32_t index) const {
+
+    itemstack inventory::get_item(const int32_t index) const {
         return this->items[index];
     }
 
