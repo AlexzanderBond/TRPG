@@ -27,4 +27,6 @@ add_executable(TRPG main.cpp
         item/item.h
         item/inventory.cpp
         item/inventory.h
+        entity/player.cpp
+        entity/player.h
 )

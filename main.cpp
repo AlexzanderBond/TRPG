@@ -14,7 +14,7 @@ int main() {
 
     std::vector<std::shared_ptr<rpg::action>> possible_actions;
 
-    std::vector default_actions = {rpg::EXPLORE};
+    std::vector default_actions = {rpg::EXPLORE, rpg::VIEW};
 
     possible_actions.insert(possible_actions.end(), default_actions.begin(), default_actions.end());
 

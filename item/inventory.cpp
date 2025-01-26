@@ -8,6 +8,7 @@
 #include <ostream>
 
 namespace rpg {
+
     inventory::inventory(const int32_t size) {
         this->size = size;
         this->items.resize(size);
@@ -17,7 +18,7 @@ namespace rpg {
         this->items.push_back({item, 1});
     }
 
-    void inventory::remove_item(const std::shared_ptr<item> &item, int32_t amount) {
+    void inventory::remove_item(const std::shared_ptr<item> &item, const int32_t amount) {
         for (int32_t i = 0; i < this->items.size(); i++) {
             auto& is = this->items[i];
 
@@ -51,8 +52,21 @@ namespace rpg {
     }
 
     void inventory::print() {
-        for (const auto &item: this->items) {
-            std::cout << item << std::endl;
+        for (const auto &itemstack: this->items) {
+            std::cout << itemstack << std::endl;
         }
+    }
+
+    std::ostream & operator<<(std::ostream &os, const itemstack &itemstack) {
+        os << itemstack.amount << "x " << itemstack.item->get_name();
+        return os;
+    }
+
+    std::ostream & operator<<(std::ostream &os, const inventory &inventory) {
+        for (const auto &itemstack: inventory.items) {
+            os << itemstack << std::endl;
+        }
+
+        return os;
     }
 } // rpg

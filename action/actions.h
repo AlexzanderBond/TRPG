@@ -24,6 +24,7 @@ namespace rpg {
     };
     inline std::shared_ptr<rpg::action> EXPLORE;
     inline std::shared_ptr<rpg::action> INVESTIGATE;
+    inline std::shared_ptr<rpg::action> VIEW;
 
     inline void register_actions() {
         EXPLORE = std::make_shared<rpg::action>(
@@ -37,6 +38,16 @@ namespace rpg {
                 uint32_t random_index = gs->get_random_number(0, static_cast<uint32_t>(templates.size() - 1));
 
                 std::cout << rpg::format(templates[random_index], gs->get_current_location()->get_name(), gs->get_current_location()->get_description()) << std::endl;
+            });
+
+        VIEW = std::make_shared<rpg::action>("View", "Look at something.", [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>& args) {
+                if (args.size() != 1) {
+                    if (args[1] == "inventory") {
+                        std::cout << std::endl << "Player Inventory:" << std::endl << gs->get_player().get_inventory() << std::endl;
+                    }
+                } else {
+                    std::cout << "What would you like to view?" << std::endl;
+                }
             });
 
         INVESTIGATE = std::make_shared<rpg::action>(

@@ -6,8 +6,6 @@
 #define ITEM_H
 #include <cstdint>
 #include <string>
-#include <bits/allocator.h>
-#include <bits/stl_vector.h>
 
 namespace rpg {
 
@@ -20,6 +18,9 @@ private:
 public:
     item(int32_t id, const std::string &name);
     virtual ~item();
+
+    std::string get_name() { return name; }
+
     bool operator==(const item& other) const;
 };
 

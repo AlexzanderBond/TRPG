@@ -7,6 +7,7 @@
 #include <stack>
 #include <memory>
 
+#include "../entity/living_entity.h"
 #include "../location/location.h"
 
 
@@ -20,6 +21,7 @@ namespace rpg {
         std::shared_ptr<rpg::location> current_location;
         std::stack<std::shared_ptr<rpg::location>> previous_locations;
         std::unique_ptr<std::random_device> rd;
+        std::shared_ptr<rpg::living_entity> player;
 
     public:
         game_state();
@@ -31,6 +33,7 @@ namespace rpg {
         [[nodiscard]] std::shared_ptr<rpg::location> get_current_location() const;
         [[nodiscard]] std::shared_ptr<rpg::location> get_previous_location() const;
         [[nodiscard]] uint32_t get_random_number(uint32_t min, uint32_t max) const;
+        [[nodiscard]] rpg::living_entity& get_player() const;
     };
 }
 
