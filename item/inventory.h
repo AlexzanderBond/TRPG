@@ -16,6 +16,11 @@ namespace rpg {
         std::shared_ptr<item> item;
         int32_t amount;
 
+        itemstack() : item(nullptr), amount(0) {}
+        itemstack(const std::shared_ptr<class item>& item, int32_t amount) : item(item), amount(amount) {}
+
+        [[nodiscard]] bool is_valid() const { return item != nullptr; }
+
         friend std::ostream& operator<<(std::ostream& os, const itemstack& itemstack);
     };
 
@@ -27,7 +32,7 @@ protected:
 public:
     explicit inventory(int32_t size);
 
-    void add_item(const std::shared_ptr<item> &item);
+    bool add_item(const std::shared_ptr<item> &item);
     void remove_item(const std::shared_ptr<item>& item, int32_t amount = -1);
     void remove_item(int32_t index, int32_t amount = -1);
     [[nodiscard]] itemstack get_item(int32_t index) const;

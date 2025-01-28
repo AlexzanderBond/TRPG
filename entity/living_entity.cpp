@@ -7,9 +7,10 @@
 #include "entity.h"
 
 namespace rpg {
-    living_entity::living_entity(const std::shared_ptr<rpg::entity> &entity): inv(20) {
+    living_entity::living_entity(const std::shared_ptr<rpg::entity> &entity) {
         this->entity = entity;
         this->health = this->entity->get_max_health();
+        this->inv = std::make_unique<inventory>(20);
     }
 
     int32_t living_entity::get_health() const {
@@ -40,8 +41,8 @@ namespace rpg {
         return this->entity->get_defense();
     }
 
-    inventory& living_entity::get_inventory() {
-        return this->inv;
+    inventory& living_entity::get_inventory() const {
+        return *this->inv;
     }
 
     void living_entity::set_health(const int32_t health) {

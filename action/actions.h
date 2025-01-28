@@ -28,7 +28,7 @@ namespace rpg {
 
     inline void register_actions() {
         EXPLORE = std::make_shared<rpg::action>(
-            "Explore",
+            "explore",
             "Explore the world.",
             [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>&) {
                 gs->update_location(FOREST_LOCATION);
@@ -40,7 +40,7 @@ namespace rpg {
                 std::cout << rpg::format(templates[random_index], gs->get_current_location()->get_name(), gs->get_current_location()->get_description()) << std::endl;
             });
 
-        VIEW = std::make_shared<rpg::action>("View", "Look at something.", [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>& args) {
+        VIEW = std::make_shared<rpg::action>("view", "Look at something.", [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>& args) {
                 if (args.size() != 1) {
                     if (args[1] == "inventory") {
                         std::cout << std::endl << "Player Inventory:" << std::endl << gs->get_player().get_inventory() << std::endl;
@@ -51,7 +51,7 @@ namespace rpg {
             });
 
         INVESTIGATE = std::make_shared<rpg::action>(
-            "Investigate",
+            "investigate",
             "Investigate the world.",
             [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>&) {
                 std::cout << "Investigate" << std::endl;

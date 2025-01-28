@@ -15,7 +15,7 @@ class living_entity {
 protected:
     std::shared_ptr<entity> entity;
     int32_t health;
-    inventory inv;
+    std::unique_ptr<inventory> inv;
 
 public:
     explicit living_entity(const std::shared_ptr<rpg::entity> &entity);
@@ -29,7 +29,7 @@ public:
     [[nodiscard]] std::string get_description() const;
     [[nodiscard]] int32_t get_max_health() const;
     [[nodiscard]] int32_t get_defense() const;
-    [[nodiscard]] inventory& get_inventory();
+    [[nodiscard]] inventory& get_inventory() const;
     void set_health(int32_t health);
 
     virtual void take_damage(int32_t damage);

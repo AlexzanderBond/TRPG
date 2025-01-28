@@ -14,8 +14,25 @@ namespace rpg {
         this->items.resize(size);
     }
 
-    void inventory::add_item(const std::shared_ptr<item> &item) {
-        this->items.push_back({item, 1});
+    bool inventory::add_item(const std::shared_ptr<item> &item) {
+        size_t last_empty_slot = size;
+
+        for (int i = 0; i < this->items.size(); i++) {
+            if (!this->items[i].is_valid() && i < last_empty_slot) {
+                last_empty_slot = i;
+            } else if (this->items[i].item == item) {
+                this->items[i].amount++;
+                return true;
+            }
+        }
+
+        if (last_empty_slot >= size) {
+            return false;
+        }
+
+        this->items[last_empty_slot].item = item;
+        this->items[last_empty_slot].amount = 1;
+        return true;
     }
 
     void inventory::remove_item(const std::shared_ptr<item> &item, const int32_t amount) {
@@ -58,13 +75,22 @@ namespace rpg {
     }
 
     std::ostream & operator<<(std::ostream &os, const itemstack &itemstack) {
-        os << itemstack.amount << "x " << itemstack.item->get_name();
+        if (itemstack.is_valid())
+            os << itemstack.amount << "x " << itemstack.item->get_name();
         return os;
     }
 
     std::ostream & operator<<(std::ostream &os, const inventory &inventory) {
-        for (const auto &itemstack: inventory.items) {
-            os << itemstack << std::endl;
+        for(size_t i = 0; i < inventory.items.size(); i++) {
+            os << (i+1) << ": ";
+
+            if (inventory.items[i].is_valid()) {
+                os << inventory.items[i];
+            } else {
+                os << "Empty";
+            }
+
+            os << std::endl;
         }
 
         return os;

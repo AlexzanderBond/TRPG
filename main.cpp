@@ -21,7 +21,7 @@ int main() {
     while (true) {
         std::string input;
 
-        std::cin >> input;
+        std::getline(std::cin, input);
 
         std::vector<std::string> inputArgs = split(input, ' ');
 
@@ -33,8 +33,7 @@ int main() {
             }
         }
 
-        possible_actions.clear();
-        possible_actions.insert(possible_actions.end(), default_actions.begin(), default_actions.end());
+        possible_actions = default_actions;
         gs->get_possible_actions(possible_actions);
     }
 
