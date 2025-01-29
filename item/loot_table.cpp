@@ -5,9 +5,9 @@
 #include "loot_table.h"
 
 void rpg::loot_table::calculate_total_weight() {
-    int32_t total_weight = 0;
-    for (auto &item : items) {
-        total_weight += item.weight;
+    uint32_t total_weight = 0;
+    for (auto &[weight, item] : items) {
+        total_weight += weight;
     }
     this->total_weight = total_weight;
 }
@@ -51,7 +51,19 @@ std::vector<rpg::itemstack> rpg::loot_table::get_random_items(std::random_device
 }
 
 std::ostream & rpg::operator<<(std::ostream &os, const loot_table &loot_table) {
-    os << "Loot Table{";
-    //TODO: Finish implementing the loottable print method
+    os << "Loot Table{Items=";
+
+    bool first = true;
+
+    for (const auto &[weight, item] : loot_table.items) {
+        if (!first) {
+            os << ", ";
+        }
+        first = false;
+        os << "Loot Item{Weight=" << weight << ", Item=" << item->get_name() << "}";
+    }
+
+    os << "}";
+
     return os;
 }

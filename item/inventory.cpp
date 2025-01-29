@@ -15,23 +15,23 @@ namespace rpg {
     }
 
     bool inventory::add_item(const std::shared_ptr<item> &item) {
-        size_t last_empty_slot = size;
+        size_t first_empty_slot = -1;
 
         for (int i = 0; i < this->items.size(); i++) {
-            if (!this->items[i].is_valid() && i < last_empty_slot) {
-                last_empty_slot = i;
-            } else if (this->items[i].item == item) {
+            if (!this->items[i].is_valid()) {
+                if (first_empty_slot == -1)
+                    first_empty_slot = i;
+            } else if (*this->items[i].item == *item) {
                 this->items[i].amount++;
                 return true;
             }
         }
 
-        if (last_empty_slot >= size) {
+        if (first_empty_slot == -1) {
             return false;
         }
 
-        this->items[last_empty_slot].item = item;
-        this->items[last_empty_slot].amount = 1;
+        this->items[first_empty_slot] = itemstack(item, 1);
         return true;
     }
 

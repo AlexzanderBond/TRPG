@@ -10,6 +10,7 @@
 #include <random>
 
 #include "../entity/creature.h"
+#include "../item/loot_table.h"
 
 namespace rpg {
     class action;
@@ -21,11 +22,15 @@ class location {
 protected:
     std::string name;
     std::string description;
+    std::vector<std::shared_ptr<rpg::action>> possible_actions;
     std::vector<std::shared_ptr<rpg::creature>> possible_creatures;
+    rpg::loot_table discoverable_items;
 
 public:
     location(const std::string &name, const std::string &description,
-             std::vector<std::shared_ptr<rpg::creature>> possible_creatures);
+             const std::vector<std::shared_ptr<rpg::action>> &possible_actions,
+             std::vector<std::shared_ptr<rpg::creature>> possible_creatures,
+             const rpg::loot_table &discoverable_items);
 
     virtual ~location();
 
@@ -34,6 +39,8 @@ public:
     [[nodiscard]] std::vector<std::shared_ptr<rpg::creature>> get_possible_creatures();
 
     [[nodiscard]] std::shared_ptr<rpg::creature> get_random_creature(std::random_device& rd);
+
+    std::vector<rpg::itemstack> discover_items(std::random_device &rd, int32_t rolls);
 
     virtual void get_possible_actions(std::vector<std::shared_ptr<rpg::action>> &vector);
 };

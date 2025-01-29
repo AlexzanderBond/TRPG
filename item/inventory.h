@@ -19,7 +19,7 @@ namespace rpg {
         itemstack() : item(nullptr), amount(0) {}
         itemstack(const std::shared_ptr<class item>& item, int32_t amount) : item(item), amount(amount) {}
 
-        [[nodiscard]] bool is_valid() const { return item != nullptr; }
+        [[nodiscard]] bool is_valid() const { return item && amount > 0; }
 
         friend std::ostream& operator<<(std::ostream& os, const itemstack& itemstack);
     };

@@ -41,8 +41,8 @@ namespace rpg {
         return this->entity->get_defense();
     }
 
-    inventory& living_entity::get_inventory() const {
-        return *this->inv;
+    inventory* living_entity::get_inventory() const {
+        return this->inv.get();
     }
 
     void living_entity::set_health(const int32_t health) {

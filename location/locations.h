@@ -8,9 +8,17 @@
 
 #include "location.h"
 #include "../entity/entities.h"
+#include "../game/registry.h"
 
 namespace rpg {
-    inline std::shared_ptr<location> FOREST_LOCATION;
+    inline rpg::registry<std::string, std::shared_ptr<rpg::location>> location_registry;
+
+    template<typename ...Args>
+    std::shared_ptr<location> register_location(Args... args) {
+        std::shared_ptr<location> new_item = std::make_shared<location>(args...);
+        location_registry.register_item(new_item->get_name(), new_item);
+        return new_item; // Return the newly created item
+    }
 
     /**
      * PC stands for possible_creatures
@@ -24,9 +32,7 @@ namespace rpg {
         return creatures;
     }
 
-    inline void register_locations() {
-        FOREST_LOCATION = std::make_shared<rpg::location>("forest", "You see a dense and mysterious forest, enthralled with life. You hear some rustling around you. Do you want to investigate or will you leave it a mystery.", pc({WOLF, TROLL}));
-    }
+    inline std::shared_ptr<location> FOREST_LOCATION = register_location("forest", "A forested area with many trees and wildlife.", std::vector<std::shared_ptr<rpg::action>>({}), pc({WOLF, TROLL}), loot_table{});
 }
 
 #endif //LOCATIONS_H

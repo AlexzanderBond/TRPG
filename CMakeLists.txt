@@ -31,4 +31,9 @@ add_executable(TRPG main.cpp
         entity/player.h
         item/loot_table.cpp
         item/loot_table.h
+        item/loot_tables.h
+        item/items.h
+        action/actions.cpp
+        game/registry.cpp
+        game/registry.h
 )

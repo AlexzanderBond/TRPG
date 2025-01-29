@@ -2,13 +2,12 @@
 
 #include "action/actions.h"
 #include "entity/entities.h"
+#include "item/items.h"
 #include "location/locations.h"
 #include "utility/string.h"
 
 int main() {
     rpg::register_entities();
-    rpg::register_locations();
-    rpg::register_actions();
 
     std::shared_ptr<rpg::game_state> gs = std::make_shared<rpg::game_state>();
 
@@ -17,6 +16,8 @@ int main() {
     std::vector default_actions = {rpg::EXPLORE, rpg::VIEW};
 
     possible_actions.insert(possible_actions.end(), default_actions.begin(), default_actions.end());
+
+    gs->get_player().get_inventory()->add_item(rpg::WOLF_SKIN);
 
     while (true) {
         std::string input;
