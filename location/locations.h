@@ -8,11 +8,10 @@
 
 #include "location.h"
 #include "../entity/entities.h"
+#include "../game/registries.h"
 #include "../game/registry.h"
 
 namespace rpg {
-    inline rpg::registry<std::string, std::shared_ptr<rpg::location>> location_registry;
-
     template<typename ...Args>
     std::shared_ptr<location> register_location(Args... args) {
         std::shared_ptr<location> new_item = std::make_shared<location>(args...);
@@ -32,7 +31,7 @@ namespace rpg {
         return creatures;
     }
 
-    inline std::shared_ptr<location> FOREST_LOCATION = register_location("forest", "A forested area with many trees and wildlife.", std::vector<std::shared_ptr<rpg::action>>({}), pc({WOLF, TROLL}), loot_table{});
+    inline std::shared_ptr<location> FOREST_LOCATION = register_location("forest", "A forested area with many trees and wildlife.", std::vector{rpg::INVESTIGATE}, pc({WOLF, TROLL}), loot_table{});
 }
 
 #endif //LOCATIONS_H

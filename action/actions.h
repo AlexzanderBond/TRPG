@@ -13,12 +13,11 @@
 #include <cstring>
 
 #include "action.h"
-#include "../location/locations.h"
+#include "../game/registries.h"
+#include "../game/registry.h"
 #include "../utility/format.h"
 
 namespace rpg {
-    inline rpg::registry<std::string, std::shared_ptr<rpg::action>> action_registry;
-
     template<typename ...Args>
     std::shared_ptr<rpg::action> register_action(Args... args) {
         std::shared_ptr<rpg::action> new_action = std::make_shared<rpg::action>(args...);
@@ -35,7 +34,7 @@ namespace rpg {
     inline std::shared_ptr<rpg::action> EXPLORE = register_action("explore",
             "Explore the world.",
             [](const std::shared_ptr<game_state> &gs, const std::vector<std::string>&) {
-                gs->update_location(FOREST_LOCATION);
+                gs->update_location(location_registry.get("forest"));
 
                 const auto& templates = EXPLORE_TEMPLATES;
 

@@ -36,4 +36,5 @@ add_executable(TRPG main.cpp
         action/actions.cpp
         game/registry.cpp
         game/registry.h
+        game/registries.h
 )
